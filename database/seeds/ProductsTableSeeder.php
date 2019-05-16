@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Product;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -14,8 +15,11 @@ class ProductsTableSeeder extends Seeder
         $categories = \App\Models\Category::all();
         factory(\App\Models\Product::class, 100)
             ->make()
-            ->each(function (\App\Models\Product $product) use ($categories) {
-                $product->category_id = $categories->random()->id;
+            ->each(function (Product $product) use ($categories) {
+                $tenanId = rand(1,2);
+                $category = $categories->where('company_id', $tenanId)->random();
+                $product->category_id = $category->id;
+                $product->company_id = $tenanId;
                 $product->save();
             });
     }

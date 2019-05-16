@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'company_id'];
+
+    public function Company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
+
