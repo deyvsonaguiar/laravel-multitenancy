@@ -4,17 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Tenant\TenantScope;
+use App\Tenant\TenantModels;
 
 class Category extends Model
 {
+    use TenantModels;
+
     protected $fillable = ['name', 'company_id'];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope(new TenantScope);
-    }
 
     public function Company()
     {
