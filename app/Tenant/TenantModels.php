@@ -2,6 +2,7 @@
 
 namespace App\Tenant;
 
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Model;
 
 trait TenantModels
@@ -10,7 +11,7 @@ trait TenantModels
     {
         parent::boot();
 
-        static::addGlobalScope(new TenantScope);
+        static::addGlobalScope(new TenantScope());
 
         static::creating(function (Model $obj) {
             $company = \Tenant::getTenant();
@@ -18,6 +19,11 @@ trait TenantModels
                 $obj->company_id = $company->id;
             }
         });
+    }
+
+    public function Company()
+    {
+        return $this->belongsTo(Company::class);
     }
 
 }

@@ -34,7 +34,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @if (Auth::user())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('app.categories.index') }}">{{ __('Categorias') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('app.products.index') }}">{{ __('Produtos') }}</a>
+                        </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

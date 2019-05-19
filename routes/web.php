@@ -19,7 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'app', 'as' => 'app.', 'namespace' => 'app'], function () {
     Auth::routes(['register' => false]);
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['auth', 'tenant']], function () {
         Route::get('dashboard', function () {
            return view('app.dashboard');
         });
